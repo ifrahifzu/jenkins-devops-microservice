@@ -18,13 +18,13 @@ pipeline {
 		}		
 	} post {
 		always {
-			echo "the echo always"
+			echo 'the echo always'
 			}
 		success {
-			echo "the echo on success"
+			echo 'the echo on success'
 			}
 		failure {
-			echo "the echo on failure"
+			echo 'the echo on failure'
 			}
 	}
 }
