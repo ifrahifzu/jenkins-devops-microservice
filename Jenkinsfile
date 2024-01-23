@@ -16,7 +16,8 @@ pipeline {
 			echo "Integ Test"
 		}	
 		}		
-	} post {
+	} 
+	post {
 		always {
 			echo 'the echo always'
 			}
