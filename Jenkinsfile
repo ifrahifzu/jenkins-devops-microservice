@@ -11,8 +11,10 @@ pipeline {
 		steps {
 			sh 'mvn --version'
 			sh 'docker version'
+			sh 'java -version'
 			echo "Build"
 			echo "path --> $PATH"
+
 			echo "docker path --> $env.dockerHome"
 			echo "maven path --> $env.mavenHome"			
             echo "build_number --> $env.BUILD_NUMBER"
