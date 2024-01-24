@@ -1,5 +1,5 @@
 package com.in28minutes.microservices.currencyexchangeservice;
-package groovy.lang;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
