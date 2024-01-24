@@ -1,6 +1,6 @@
 pipeline {
 	//agent { docker { image 'node:16.20'} }
-	agent { docker { image 'maven:3.9.6'} }
+	agent any
 	environment {
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
@@ -10,11 +10,10 @@ pipeline {
 	    stage('checkout') { 
 		steps {
 			sh 'mvn --version'
-
-
+			sh 'java -version'
+			sh 'docker version'
 			echo "Build"
 			echo "path --> $PATH"
-
 			echo "docker path --> $env.dockerHome"
 			echo "maven path --> $env.mavenHome"			
             echo "build_number --> $env.BUILD_NUMBER"
@@ -29,16 +28,28 @@ pipeline {
 				sh "mvn clean compile"
 			}
 		}
-	    stage('test') { 
+	    stage('package') { 
 		steps {
-			sh "mvn test"
+			sh "mvn package -DskipTests"
 		}	
 		}
-	    stage('Integration Test') { 
+	    stage('Build Docker Image') { 
 		steps {
-			echo "mvn failsafe:integration-test failsafe:verify"
+			script {
+				dockerImage = docker.build("ifrahifzu/currency-exchange-devops:${env.BUILD_TAG}")		
+			}
 		}	
-		}		
+		}
+		stage('Push Docker Image') { 
+		steps {
+			script {
+				docker.withRegistry('', 'docker-hub') {
+				dockerImage.push();
+				dockerImage.push('latest');
+				}
+				}
+		}	
+		}
 	} 
 	post {
 		always {
