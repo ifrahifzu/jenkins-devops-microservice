@@ -12,14 +12,14 @@ pipeline {
 			sh 'mvn --version'
 			sh 'docker version'
 			echo "Build"
-			echo "path = $PATH"
-			echo "docker path = $dockerHome"
-			echo "maven path = $mavenHome"			
-            echo "build_number = $env.BUILD_NUMBER"
-            echo "build_id = $env.BUILD_ID"
-            echo "build_number = $env.JOB_NAME"
-            echo "build_number = $env.BUILD_TAG"
-            echo "build_number = $env.BUILD_URL"
+			echo "path --> $PATH"
+			echo "docker path --> $env.dockerHome"
+			echo "maven path --> $env.mavenHome"			
+            echo "build_number --> $env.BUILD_NUMBER"
+            echo "build_id --> $env.BUILD_ID"
+            echo "build_number --> $env.JOB_NAME"
+            echo "build_number --> $env.BUILD_TAG"
+            echo "build_number --> $env.BUILD_URL"
 		}	
 		}
 		stage ('Compile') {
