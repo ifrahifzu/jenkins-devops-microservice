@@ -10,8 +10,8 @@ pipeline {
 	    stage('checkout') { 
 		steps {
 			sh 'mvn --version'
-			#sh 'docker version'
-			sh 'java -version'
+
+
 			echo "Build"
 			echo "path --> $PATH"
 
